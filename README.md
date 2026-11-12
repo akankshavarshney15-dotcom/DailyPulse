@@ -4,6 +4,10 @@
 
 DailyPulse is a responsive daily news web application that helps users explore the latest news from different categories in one place. It provides a simple and user-friendly interface to search, browse, and bookmark news articles.
 
+## Live Demo
+
+🚀 **Explore DailyPulse:** [Visit DailyPulse Website](https://akankshavarshney15-dotcom.github.io/DailyPulse/)
+
 ## About the Project
 
 DailyPulse is developed as a third-year B.Tech Computer Science Engineering project using HTML, CSS, and JavaScript. It integrates the GNews API to fetch news articles and display them dynamically.

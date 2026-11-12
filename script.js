@@ -7,7 +7,6 @@ const refreshBtn = document.getElementById("refreshBtn");
 const themeToggle = document.getElementById("themeToggle");
 const categoryButtons = document.querySelectorAll(".category-btn");
 
-const BASE_URL = "https://gnews.io/api/v4";
 
 let currentArticles = [];
 let selectedCategory = "general";
@@ -51,22 +50,17 @@ function formatDate(date) {
     });
 }
 
-// Fetch news from GNews
+
+const BACKEND_URL = "https://dailypulse-backend-kdc2.onrender.com";
+
+// Fetch news through DailyPulse backend
 async function fetchNews(category = "general", keyword = "") {
     newsContainer.innerHTML =
         '<p class="loading-message">Loading latest news...</p>';
 
     try {
         const isSearch = keyword.trim() !== "";
-
-        const endpoint = isSearch ? "search" : "top-headlines";
-
-        const params = new URLSearchParams({
-            lang: "en",
-            country: "in",
-            max: "10",
-            apikey: API_KEY
-        });
+        const params = new URLSearchParams();
 
         if (isSearch) {
             params.set("q", keyword.trim());
@@ -75,11 +69,11 @@ async function fetchNews(category = "general", keyword = "") {
         }
 
         const response = await fetch(
-            `${BASE_URL}/${endpoint}?${params}`
+            `${BACKEND_URL}/api/news?${params}`
         );
 
         if (!response.ok) {
-            throw new Error(`API request failed: ${response.status}`);
+            throw new Error(`Server request failed: ${response.status}`);
         }
 
         const data = await response.json();
@@ -102,8 +96,8 @@ async function fetchNews(category = "general", keyword = "") {
 
         newsContainer.innerHTML = `
             <p class="empty-message">
-                Unable to load news. Check your API key,
-                internet connection and API request limit.
+                Unable to load news. Please check your internet connection
+                or try again later.
             </p>
         `;
     }
